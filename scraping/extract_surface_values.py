@@ -22,6 +22,7 @@ directors = []
 imdbids = []
 posters = []
 release = []
+cast = []
 
 for url in surface_urls:
     driver.get(url)
@@ -55,6 +56,7 @@ for url in surface_urls:
         synopsis.append(ptags[1].text)
         peeps = ptags[2].find_elements_by_tag_name("a")
         directors.append(peeps[0].text)
+        
 
 
 
