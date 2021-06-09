@@ -75,6 +75,7 @@
 	ఈ చిత్రము {{film_locations}} {%- if ',' in film_locations %} ప్రాంతాలలో {%else%} ప్రాంతములో {% endif %} చిత్రీకరించబడినది.
 	{%- endif %}
 	{{'\n'}}
+    References {{reflist}}
 {%- endmacro -%}
 
 
@@ -99,14 +100,14 @@
 
 {%- macro awards(Winner,Nominee) -%}
     {{ '\n==పురస్కారాలు==\n' }}
-    {%- if Winner != 'NaN' and Nominee != 'NaN'-%}
-	ఈ చిత్రానికి పలు పురస్కారాలు, నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారాలు]</ref>.
+    {% if Winner != 'NaN' and Nominee != 'NaN'%}
+    ఈ చిత్రానికి పలు పురస్కారాలు, నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} Awards]</ref>.
     {%- endif -%}
-    {%- if Winner != 'NaN' and Nominee == 'NaN' -%}}
-	ఈ చిత్రానికి పలు పురస్కారాలు వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారాలు]</ref>.
+    {% if Winner != 'NaN' and Nominee == 'NaN' %}}
+    ఈ చిత్రానికి పలు పురస్కారాలు వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} Awards]</ref>.
     {%- endif -%}
-	{%- if Nominee != 'NaN' and Winner == 'NaN' -%}}
-	ఈ చిత్రానికి పలు నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారాలు]</ref>.
+    {% if Nominee != 'NaN' and Winner == 'NaN' %}}
+    ఈ చిత్రానికి పలు నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} Awards]</ref>.
     {%- endif -%}{{'\n'}}
 	{| class="wikitable sortable plainrowheaders"
 	! scope="col" | Award
@@ -179,7 +180,7 @@
 <h3>నిర్మాణం, బాక్స్ ఆఫీస్</h3>
 		{%- if production_company!="NaN" and budget!="NaN" -%}
 			{%- set line =[
-					"నిర్మాణ సంస్థ " +  production_company + "," + budget + "బడ్జెట్ తో ఈ చిత్రాన్ని నిర్మించారు" ,
+					"నిర్మాణ సంస్థ " +  production_company + "," + budget + "బడ్జెట్ తో ఈ చిత్రాన్ని నిర్మించారు" .,
 					budget + "బడ్జెట్ తో ఈ చిత్రాన్ని" + "నిర్మాణ సంస్ అయిన " +  production_company + "ఈ చిత్రాన్ని నిర్మించారు"
 				]|random
 			-%}
@@ -208,7 +209,7 @@
     {%- if cast != "NaN" or  Director != "NaN" or writers!= "NaN" or producer!= "NaN" or film_editor!= "NaN" or cinematography!= "NaN" or casting!= "NaN" or production_design!= "NaN" or set_decoration!= "NaN" or art_design!= "NaN" -%}	
 		{{ '\n==తారాగణం==\n' }}
 		{%- if cast != "NaN" -%}
-			నటీ నటులు, పాత్రలు<ref name="cast">[https://www.imdb.com/title/{{IMDbID}}/fullcredits?ref_=tt_cl_sm#cast {{Title}} తారాగణం]</ref>
+			నటీ నటులు, పాత్రలు<ref name="cast">[https://www.imdb.com/title/{{IMDbID}}/fullcredits?ref_=tt_cl_sm#cast {{Title}} Cast]</ref>
 			{{ '\n' }}
 			{%- for c in cast -%}
 			* {{ c + '\n' }}
@@ -329,7 +330,7 @@
 		{%- endif %}
 
 		{%- if Songs != "NaN" -%}
-			ఈ చిత్రం లో మొత్తం {{ lensong }} పాటలు ఉన్నాయి. ఈ చిత్ర పాటల జాబితా క్రింద ఇవ్వబడింది.<ref name="song">[https://www.imdb.com/title/{{IMDbID}}/soundtrack?ref_=tt_trv_snd/ {{Title}} సౌండ్ ట్రాక్]</ref>	
+			ఈ చిత్రం లో మొత్తం {{ lensong }} పాటలు ఉన్నాయి. ఈ చిత్ర పాటల జాబితా క్రింద ఇవ్వబడింది.<ref name="song">[https://www.imdb.com/title/{{IMDbID}}/soundtrack?ref_=tt_trv_snd/ {{Title}} Songs]</ref>	
 			{{ '\n' }}
 			{%- if songcomma == "True"  -%}
 				{| class="wikitable"
@@ -356,9 +357,7 @@
 	{%- endif %}
 {%- endmacro -%}
 
-
-
-{%- macro references_categories(Rated,Genre,genre_list,Release_Year,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
+{%- macro references_categories(rated,Genre,genre_list,Release_Year,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
 {#{==మూలాలు==}#} 
 <h3>మూలాలు</h3>
 		{{reflist}}
@@ -379,8 +378,8 @@
 		[[Category: {{Release_Year}} ]]
         {%- endif -%}
         
-        {%- if Rated!="NaN"-%}		
-		[[Category: {{Rated}} ]]
+        {%- if rated!="NaN"-%}		
+		[[Category: {{rated}} ]]
         {%- endif -%}
         
 		{%- if Director!="NaN"-%}
@@ -439,6 +438,8 @@
 
 {{ introp2(budget, year, languages, countries ,storyline,based_on) -}}
 
+{{- awards(Winner,Nominee) -}}
+
 {{- crew(IMDbID,Title,cast,Director, writers, producer, composer, film_editor, cinematography, casting, production_design, set_decoration, art_design) }}
 
 {{- songs_table(Songs,lensong,songcomma,composer,sound_mix,IMDbID,Title) }}
@@ -449,6 +450,4 @@
 
 {{-production_boxOffice(production_company,budget,opening_weekend,Gross,cumulative) -}}
 
-{{- awards(Winner,Nominee) -}}
-
-{{-references_categories(Rated,Genre,genre_list,Release_Year,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}
+{{-references_categories(rated,Genre,genre_list,Release_Year,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}

@@ -27,10 +27,6 @@ def getData(row,i):
 		'budget':row.budget.values[0],
 		'opening_weekend':row.opening_weekend.values[0],
 		'Gross':row.Gross.values[0],
-		'IMDbID1':row.IMDbID.values[0],
-		'Title2':row.Title.values[0],
-		'IMDbID2':row.IMDbID.values[0],
-		'IMDbID3':row.IMDbID.values[0],
 		'Rated':row.Rated.values[0],
 		'Genre':row.Genre.values[0],
 		'Release_Year':row.Release_Year.values[0],
@@ -66,9 +62,8 @@ def getData(row,i):
 		'Gross':row.Gross.values[0],
 		'composer':row.composer.values[0],
 		'sound_mix':row.sound_mix.values[0],
-		'IMDbID':row.IMDbID.values[0],		
+		'IMDbID':row.IMDbID.values[0],
 		'Title':row.Title.values[0],
-        'cast':row.cast.values[0].split(';'),
 		'Director':row.Director.values[0],
 		'writers':row.writers.values[0],
 		'producer':row.producer.values[0],
@@ -77,7 +72,17 @@ def getData(row,i):
 		'casting':row.casting.values[0],
 		'production_design':row.production_design.values[0],
 		'set_decoration':row.set_decoration.values[0],
-		'art_design':row.art_design.values[0]
+		'art_design':row.art_design.values[0],
+		'genre_list':row.Genre.values[0].split(', '),
+        'languages_list':row.languages.values[0].split(', '),
+        'director_list':row.Director.values[0].split(', '),
+        'writers_list':row.writers.values[0].split(', '),
+        'countries_list':row.countries.values[0].split(', '),
+        'colors_list':row.colors.values[0].split(', '),
+        'editor_list':row.film_editor.values[0].split(', '),
+        'production_list':row.production_company.values[0].split(', '),
+        'composer_list':row.composer.values[0].split(', '),
+        'cine_list':row.cinematography.values[0].split(', ')
 	}
 	if(row.Songs.values[0] != "NaN"):
 		data['Songs']=ast.literal_eval(row.Songs.values[0])
@@ -89,10 +94,15 @@ def getData(row,i):
 	else:
 		data['Songs']=row.Songs.values[0]
 
+	if(row.cast.values[0] != "NaN"):
+		data['cast']=row.cast.values[0].split(';')
+	else:
+		data['cast']=row.cast.values[0]
+	
 	return data
 
 def main():
-	file_loader = FileSystemLoader('./templates')
+	file_loader = FileSystemLoader('./Templates')
 	env = Environment(loader=file_loader)
 	template = env.get_template('main_template.j2')
 
