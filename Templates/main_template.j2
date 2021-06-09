@@ -180,7 +180,7 @@
 <h3>నిర్మాణం, బాక్స్ ఆఫీస్</h3>
 		{%- if production_company!="NaN" and budget!="NaN" -%}
 			{%- set line =[
-					"నిర్మాణ సంస్థ " +  production_company + "," + budget + "బడ్జెట్ తో ఈ చిత్రాన్ని నిర్మించారు" .,
+					"నిర్మాణ సంస్థ " +  production_company + "," + budget + "బడ్జెట్ తో ఈ చిత్రాన్ని నిర్మించారు. " ,
 					budget + "బడ్జెట్ తో ఈ చిత్రాన్ని" + "నిర్మాణ సంస్ అయిన " +  production_company + "ఈ చిత్రాన్ని నిర్మించారు"
 				]|random
 			-%}
