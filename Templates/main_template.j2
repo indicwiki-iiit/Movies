@@ -61,7 +61,7 @@
 	{%- if stars != 'NaN' %}
 	{%- set line =[
 		"ఈ చిత్రం లో నటించిన ప్రముఖ నటులు "+stars+".",
-		stars +"ఈ చిత్ర ప్రముఖ నటులు."]|random
+		stars +" ఈ చిత్ర ప్రముఖ నటులు."]|random
 		-%}
 		{{-line-}}
 	{%- endif %}
@@ -80,7 +80,7 @@
 
 
 
-{%- macro introp2(budget, Release_Year, languages, countries ,storyline,based_on) %}
+{%- macro introp2(budget, Release_Year, languages, countries,synopsis,based_on) %}
 	{%- if budget != 'NaN' -%}
 	{%- set line =[
 		"ఈ చిత్రాన్ని తయారు చేయడానికి "+budget+ "ఖర్చు పెట్టారు.",
@@ -88,33 +88,47 @@
 		-%}
 		{{-line-}} 
 	{%- endif -%}
-	
-	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం {{languages}} భాషలో,{{countries}} దేశాల్లో విడుదల చేయబడింది.
-	{%- if storyline != 'NaN' %}
-	ఈ చిత్ర కథాంశం  {{storyline}}
+	{%- if Release_Year != 'NaN' and languages!='NaN' and countries!='NaN' -%}
+	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం, {{languages}} భాషలో,{{countries}} దేశాల్లో విడుదల చేయబడింది.
+	{%- elif Release_Year == "NaN" and languages!='NaN' and countries!='NaN' -%}
+	ఈ చిత్రం {{languages}} భాషలో,{{countries}} దేశాల్లో విడుదల చేయబడింది.
+	{%- elif Release_Year != "NaN" and languages!='NaN' and countries=='NaN' -%}
+	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం, {{languages}} భాషలో విడుదల చేయబడింది.
+	{%- elif Release_Year != "NaN" and languages=='NaN' and countries!='NaN' -%}
+	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం {{countries}} దేశాల్లో విడుదల చేయబడింది.
+	{%- endif %}
+	{%- if synopsis != 'NaN' %}
+	ఈ చిత్ర కథాంశం  {{synopsis}}
 	{%- endif %}
 	{%- if based_on != 'NaN' %}
 	ఈ చిత్రం {{based_on}} ఆధారంగా చిత్రీకరించబడింది.
 	{%- endif %}
 {%- endmacro -%}
 
+{%- macro plot(storyline)-%}
+{{ '\n==పధకము==\n' }}
+{%- if storyline != "NaN" -%}
+{{storyline}}
+{%- endif -%}
+{%-endmacro-%}
+
 
 {%- macro awards(Winner,Nominee) -%}
     {{ '\n==పురస్కారాలు==\n' }}
     {%- if Winner != 'NaN' and Nominee != 'NaN'-%}
-    ఈ చిత్రానికి పలు పురస్కారాలు, నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} Awards]</ref>.
+    ఈ చిత్రానికి పలు పురస్కారాలు, నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}
     {%- if Winner != 'NaN' and Nominee == 'NaN' -%}}
-    ఈ చిత్రానికి పలు పురస్కారాలు వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} Awards]</ref>.
+    ఈ చిత్రానికి పలు పురస్కారాలు వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}
     {%- if Nominee != 'NaN' and Winner == 'NaN' -%}}
-    ఈ చిత్రానికి పలు నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} Awards]</ref>.
+    ఈ చిత్రానికి పలు నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}{{'\n'}}
 	{| class="wikitable sortable plainrowheaders"
-	! scope="col" | Award
-	! scope="col" | Category
-	! scope="col" | Recipient(s)
-	! scope="col" | Result   
+	! scope="col" | పురస్కారము
+	! scope="col" | 
+	! scope="col" | గ్రహీత
+	! scope="col" | ఫలితము
     {%- if Winner != "NaN" -%}
         {%- for item in Winner -%}
             {% for values in Winner[item] %}
@@ -143,9 +157,9 @@
 {%- macro Technical_Details(Duration,sound_mix,colors) -%}
 {%- if sound_mix!="NaN" or Duration!="NaN" or colors!="NaN"-%}
 {#{ '\n' ==సాంకేతిక వివరాలు== '\n' }#}
-<h3>సాంకేతిక వివరాలు</h3>
-{%- if Duration!=0-%}
-    ఈ చిత్ర పూర్తి వ్యవధి {{Duration}} నిమిషాలు .
+{{ '\n==సాంకేతిక వివరాలు==\n' }}
+{%- if Duration!="NaN"-%}
+    ఈ చిత్ర పూర్తి వ్యవధి {{Duration}}  .
 {%-endif-%}
 {%-if sound_mix!="NaN"-%}
 	{%- set line =[
@@ -162,14 +176,14 @@
 
 {%- macro critics_response(Votes,Rating) -%}
 {%- if Votes!="NaN" or Rating!="NaN"  -%}
-<h3>ప్రతిస్పందన</h3>
+{{ '\n==ప్రతిస్పందన==\n' }}
 {#{ ==ప్రతిస్పందన== }#}
 		{%- if Votes!="NaN" and Rating!="NaN" -%}
-			మొత్తం {{Votes}} మంది వేసిన ఓట్ల ఆధారంగా ఈ చిత్రానికి IMDb లో {{Rating}} రేటింగ్ లభించింది.
+			మొత్తం {{Votes}} మంది వేసిన ఓట్ల ఆధారంగా ఈ చిత్రానికి ఐ.ఎం.డీ.బి లో {{Rating}} రేటింగ్ లభించింది.
 		{%- elif Votes!="NaN" or Rating=="NaN" -%}
 			ఈ చిత్రానికి మొత్తం {{Votes}} వచ్చాయి.
 		{%- elif Votes=="NaN" or Rating!="NaN" -%} 
-			ఈ చిత్రానికి ఐ.ఎమ్.డీ.బి. {{Rating}} లో లభించింది 
+			ఈ చిత్రానికి ఐ.ఎం.డీ.బి లో {{Rating}} లభించింది 
 		{%- endif -%}
 
 {%- endif -%}
@@ -178,7 +192,7 @@
 {%- macro production_boxOffice(production_company,budget,opening_weekend,Gross,cumulative) -%}
 {%- if production_company!="NaN" or budget!="NaN" or opening_weekend!="NaN" or Gross!="NaN" or  cumulative!="NaN"  -%}
 {#{ ==నిర్మాణం, బాక్స్ ఆఫీస్== }#}
-<h3>నిర్మాణం, బాక్స్ ఆఫీస్</h3>
+{{ '\n==నిర్మాణం, బాక్స్ ఆఫీస్==\n' }}
 		{%- if production_company!="NaN" and budget!="NaN" -%}
 			{%- set line =[
 					"నిర్మాణ సంస్థ " +  production_company + "," + budget + "బడ్జెట్ తో ఈ చిత్రాన్ని నిర్మించారు ." ,
@@ -197,7 +211,7 @@
 		{%- endif -%}
 		
 		{%- if Gross!="NaN"-%}
-		 	ఈ చిత్రం మొత్తం అమెరికాలో{{Gross}} డాలర్లు వసూలు చేసింది.
+		 	ఈ చిత్రం మొత్తం అమెరికాలో {{Gross}} డాలర్లు వసూలు చేసింది.
 		{%- endif -%}
 		
 		{%- if cumulative!="NaN"-%}
@@ -207,20 +221,20 @@
 {%- endmacro -%}
 
 {%- macro crew(IMDbID,Title,cast,Director, writers, writers_list, producer, composer, film_editor, cinematography, casting, production_design, set_decoration, art_design) -%}
-    {%- if cast != "నాన్" or  Director != "నాన్" or writers!= "నాన్" or producer!= "నాన్" or film_editor!= "నాన్" or cinematography!= "నాన్" or casting!= "నాన్" or production_design!= "నాన్" or set_decoration!= "నాన్" or art_design!= "నాన్" -%}	
+    {%- if cast != "NaN" or  Director != "NaN" or writers!= "NaN" or producer!= "NaN" or film_editor!= "NaN" or cinematography!= "NaN" or casting!= "NaN" or production_design!= "NaN" or set_decoration!= "NaN" or art_design!= "NaN" -%}	
 		{{ '\n==తారాగణం==\n' }}
-		{%- if cast != "నాన్" -%}
+		{%- if cast != "NaN" -%}
 			{{ '\n===నటీ నటులు, పాత్రలు===\n' }}
-			ఈ చిత్రంలో నటించిన నటులు వాలా పాత్రలు<ref name="cast">[https://www.imdb.com/title/{{IMDbID}}/fullcredits?ref_=tt_cl_sm#cast {{Title}} తారాగణం]</ref>
+			ఈ చిత్రంలో నటించిన నటీనటులు వారి పాత్రలు. <ref name="cast">[https://www.imdb.com/title/{{IMDbID}}/fullcredits?ref_=tt_cl_sm#cast {{Title}} తారాగణం]</ref>
 			{{ '\n' }}
 			{%- for c in cast -%}
 			* {{ c + '\n' }}
 			{%- endfor -%}
 		{%- endif %}
 
-		{%- if Director != "నాన్" or writers!= "నాన్" or producer!= "నాన్" or composer!= "నాన్" or film_editor!= "నాన్" or cinematography!= "నాన్" or casting!= "నాన్" or production_design!= "నాన్" or set_decoration!= "నాన్" or art_design!= "నాన్" -%}	
+		{%- if Director != "NaN" or writers!= "NaN" or producer!= "NaN" or composer!= "NaN" or film_editor!= "NaN" or cinematography!= "NaN" or casting!= "NaN" or production_design!= "NaN" or set_decoration!= "NaN" or art_design!= "NaN" -%}	
 			{{ '\n===సాంకేతిక సిబ్బంది===\n' }}
-			{%- if Director != "నాన్" -%}
+			{%- if Director != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్రానికి " + Director + " దర్శకత్వం చేశారు. ",
 					Director + " ఈ చిత్రానికి దర్శకత్వం వహించారు. "
@@ -229,7 +243,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if writers != "నాన్" -%}
+			{%- if writers != "NaN" -%}
 				{%- if writers_list | length >1 -%}
 					{%- set line =[
 						writers + " ఈ చిత్రానికి రచయితలు. ",
@@ -246,7 +260,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if producer != "నాన్" -%}
+			{%- if producer != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్ర నిర్మాతగా " + producer + " వ్యవహరించారు. ",
 					producer + " ఈ చిత్రానికి నిర్మాతగా ఉన్నారు. "
@@ -255,7 +269,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if composer != "నాన్" -%}
+			{%- if composer != "NaN" -%}
 				{%- set line =[
 					composer + " ఈ చిత్రానికి సంగీత దర్శకత్వం అందించారు. ",
 					"ఈ చిత్రానికి సంగీత దర్శకత్వం " + composer + " అందించారు. "
@@ -264,7 +278,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if film_editor != "నాన్" -%}
+			{%- if film_editor != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్రానికి సంపాదకులు గా " + film_editor + " చేశారు. ",
 					film_editor + " ఈ చిత్రానికి సంపాదకులు గా ఉన్నారు. "
@@ -273,7 +287,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if cinematography != "నాన్" -%}
+			{%- if cinematography != "NaN" -%}
 				{%- set line =[
 					cinematography + " ఈ సినిమాను చిత్రీకరించారు. ",
 					"చిత్రీకరణ " + cinematography + " చేశారు. "
@@ -282,7 +296,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if casting != "నాన్" -%}
+			{%- if casting != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్రానికి తారాగణాన్ని  ఎంచుకున్న వారు " + casting + ". ",
 					"ఈ చిత్రానికి తారాగణాన్ని "+ cinematography + " ఎంపిక చేశారు. "
@@ -291,7 +305,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if production_design != "నాన్" -%}
+			{%- if production_design != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్ర నిర్మాణాన్ని "+ production_design + " రూపు కల్పించారు . ",
 					production_design + " ఈ చిత్ర నిర్మాణాన్ని రూపు కల్పించారు. "
@@ -300,7 +314,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if set_decoration != "నాన్" -%}
+			{%- if set_decoration != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్రానికి కళా దర్శకత్వం చేసినది " + set_decoration + ". ",
 					set_decoration + " ఈ చిత్రానికి కళా దర్శకత్వం చేశారు . "
@@ -309,7 +323,7 @@
 				{{- line -}}
 			{%- endif %}
 
-			{%- if art_design != "నాన్" -%}
+			{%- if art_design != "NaN" -%}
 				{%- set line =[
 					art_design + " ఈ చిత్రానికి కళ రూపకల్పన చేశారు . ",
 					"ఈ చిత్రానికి కళ రూపకల్పన చేసినది " + art_design + ". "
@@ -323,10 +337,10 @@
 {%- endmacro -%}
 
 {%- macro songs_table(Songs,lensong,songcomma,composer,sound_mix,IMDbID,Title) -%}
-    {%- if Songs != "నాన్" or  composer != "నాన్" or sound_mix!= "నాన్" -%}	
+    {%- if Songs != "NaN" or  composer != "NaN" or sound_mix!= "NaN" -%}	
 		{{ '\n==సౌండ్ ట్రాక్==\n' }}
 
-		{%- if composer != "నాన్" -%}
+		{%- if composer != "NaN" -%}
 			{%- set line =[
 				"ఈ చిత్రానికి సంగీత దర్శకత్వం " + composer + " అందించారు. ",
 				composer + " ఈ చిత్రానికి సంగీత దర్శకత్వం అందించారు. "
@@ -335,11 +349,11 @@
 			{{- line -}}
 		{%- endif %}
 		
-		{%- if sound_mix != "నాన్" -%}
+		{%- if sound_mix != "NaN" -%}
 		ఈ సినిమా సౌండ్ మిక్స్ {{ sound_mix }}. 
 		{%- endif %}
 
-		{%- if Songs != "నాన్" -%}
+		{%- if Songs != "NaN" -%}
 			ఈ చిత్రం లో మొత్తం {{ lensong }} పాటలు ఉన్నాయి. ఈ చిత్ర పాటల జాబితా క్రింద ఇవ్వబడింది.<ref name="song">[https://www.imdb.com/title/{{IMDbID}}/soundtrack?ref_=tt_trv_snd/ {{Title}} సౌండ్ ట్రాక్]</ref>	
 			{{ '\n' }}
 			{%- if songcomma == "True"  -%}
@@ -368,33 +382,35 @@
 {%- endmacro -%}
 
 {%- macro Trivia(trivia) -%}
-==కబుర్లు==
+{{ '\n==కబుర్లు==\n' }}
+{%- if (trivia != "NaN") -%}
 {{trivia}}
+{%-endif-%}
 {%- endmacro -%}
 
 {%- macro references_categories(Rated,Genre,genre_list,Release_Year,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
 {#{==మూలాలు==}#} 
-<h3>మూలాలు</h3>
+{{ '\n==మూలాలు==\n' }}
 		{{reflist}}
 		{{'\n'}}
 		{%- if Genre!="NaN"-%}
 		{%- for g in genre_list -%}
-		[[Category: {{g}} ]] 
+		[[Category: {{g}} ఫిల్మ్స్  ]] 
         {%- endfor -%}
         {%- endif -%}
         
 		{%- if languages!="NaN"-%}
 		{%- for l in languages_list -%}
-		[[Category: {{l}}]]
+		[[Category: {{l}} ఫిల్మ్స్ ]]
 		{%- endfor -%}
         {%- endif -%}
 
         {%- if Release_Year!="NaN"-%}		
-		[[Category: {{Release_Year}} ]]
+		[[Category: {{Release_Year}} ఫిల్మ్స్ ]]
         {%- endif -%}
         
-        {%- if rated!="NaN"-%}		
-		[[Category: {{rated}} ]]
+        {%- if Rated!="NaN"-%}		
+		[[Category: {{Rated}} ఫిల్మ్స్  ]]
         {%- endif -%}
         
 		{%- if Director!="NaN"-%}
@@ -468,3 +484,5 @@
 {{- Trivia(trivia) -}}
 
 {{-references_categories(Rated,Genre,genre_list,Release_Year,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}
+
+{{- plot(storyline) -}}
