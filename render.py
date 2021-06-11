@@ -19,6 +19,7 @@ def getData(row,i):
 	data = {
 		'Duration':row.Duration.values[0],
 		'sound_mix':row.sound_mix.values[0],
+		'synopsis':row.Synopsis.values[0],
 		'colors':row.colors.values[0],
 		'Votes':row.Votes.values[0],
 		'Rating':row.Rating.values[0],
@@ -65,7 +66,13 @@ def getData(row,i):
         'production_list':row.production_company.values[0].split(', '),
         'composer_list':row.composer.values[0].split(', '),
         'cine_list':row.cinematography.values[0].split(', '),
-		'trivia':row.trivia.values[0]
+		'trivia':row.trivia.values[0],
+		'eTitle':row.eTitle.values[0],
+		'distributed_by': row.distributed_by.values[0],
+		'distribution_format': row.distribution_format.values[0],
+		'main_subject': row.main_subject.values[0],
+		'part_of_series':row.part_of_series.values[0],
+		'narrative_location': row.narrative_location.values[0]
 	}
 	if(row.Songs.values[0] != "NaN"):
 		data['Songs']=ast.literal_eval(row.Songs.values[0])
@@ -105,7 +112,7 @@ def main():
 		# print(row.isna().iloc[0][39])
 		# print('*')
 		# print(row)
-		print(i, title)
+		# print(i, title)
 		print(text, '\n')
 
 if __name__ == '__main__':
