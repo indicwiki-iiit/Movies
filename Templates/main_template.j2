@@ -1,4 +1,4 @@
-{% macro Infobox(Title, Director,writers,producer,stars,composer,cinematography,film_editor,Genre,Release_Year,Duration,budget,countries,languages,IMDbID,Rated,Gross,based_on,distributed_by) %}
+{% macro Infobox(Title, Director,writers,producer,stars,composer,cinematography,film_editor,Genre,Release_Year,Duration,budget,countries,languages,IMDbID,Gross,based_on,distributed_by) %}
 	{{'{{Infobox film'}}
 	|name   = {{Title }}
 	|director      = {{Director }}
@@ -91,7 +91,7 @@
 
 
 
-{%- macro introp2(budget, Release_Year, languages, countries,main_subject, synopsis,based_on,distributed_by) %}
+{%- macro introp2(budget, Release_Year, languages, countries,Rated,main_subject, synopsis,based_on,distributed_by) %}
 	{%- if budget != 'NaN' -%}
 	{%- set line =[
 		"ఈ చిత్రాన్ని తయారు చేయడానికి "+budget+ "ఖర్చు పెట్టారు.",
@@ -108,6 +108,9 @@
 	{%- elif Release_Year != "NaN" and languages=='NaN' and countries!='NaN' -%}
 	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం {{countries}}లో విడుదల చేయబడింది.
 	{%- endif %}
+	{%- if Rated != 'NaN'-%}
+	ఈ చిత్రం {{Rated}} వయూపరిమితికి(Rated) చెందినది.
+	{%- endif -%}
 	{%- if main_subject != "NaN" -%}
 	ఈ చిత్రం యొక్క ముఖ్య పాఠ్యాంశము {{main_subject}}
 	{%- endif -%}
@@ -138,12 +141,13 @@
     {%- if Winner != 'NaN' and Nominee != 'NaN'-%}
     ఈ చిత్రానికి పలు పురస్కారాలు, నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}
-    {%- if Winner != 'NaN' and Nominee == 'NaN' -%}}
+    {%- if Winner != 'NaN' and Nominee == 'NaN' -%}
     ఈ చిత్రానికి పలు పురస్కారాలు వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}
-    {%- if Nominee != 'NaN' and Winner == 'NaN' -%}}
+    {%- if Nominee != 'NaN' and Winner == 'NaN' -%}
     ఈ చిత్రానికి పలు నామినేషన్స్ వివిధ క్యాటగిరీస్ లో లభించాయి. వాటిలో కొన్ని వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}{{'\n'}}
+	<div style="overflow-x: scroll;height : 40em;">
 	{| class="wikitable sortable plainrowheaders"
 	! scope="col" | పురస్కారము
 	! scope="col" | 
@@ -172,6 +176,7 @@
         {%- endfor -%}
     {%- endif -%}
 	{{'\n'}}|}
+	</div>
 {%- endmacro -%}
 
 {%- macro Technical_Details(Duration,sound_mix,colors,distribution_format) -%}
@@ -492,11 +497,11 @@
 
 {%-endmacro-%}
 
-{{ Infobox(Title, Director,writers,producer,stars,composer,cinematography,film_editor,Genre,Release_Year,Duration,budget,countries,languages,IMDbID,Rated,Gross,based_on,distributed_by) -}}
+{{ Infobox(Title, Director,writers,producer,stars,composer,cinematography,film_editor,Genre,Release_Year,Duration,budget,countries,languages,IMDbID,Gross,based_on,distributed_by) -}}
 
 {{ introp1(Title,eTitle, Release_Year, Genre, Director,writers,writers_list,producer,production_company,stars,composer,film_locations) -}}
 
-{{ introp2(budget, Release_Year, languages, countries ,main_subject,synopsis,based_on, distributed_by) -}}
+{{ introp2(budget, Release_Year, languages, countries ,Rated, main_subject,synopsis,based_on, distributed_by) -}}
 
 {{- plot(storyline,narrative_location) -}}
 
