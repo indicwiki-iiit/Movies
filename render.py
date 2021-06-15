@@ -66,6 +66,7 @@ def getData(row,i):
         'production_list':row.production_company.values[0].split(', '),
         'composer_list':row.composer.values[0].split(', '),
         'cine_list':row.cinematography.values[0].split(', '),
+		'stars_list':row.stars.values[0].split(', '),
 		'trivia':row.trivia.values[0],
 		'eTitle':row.eTitle.values[0],
 		'distributed_by': row.distributed_by.values[0],
@@ -85,10 +86,63 @@ def getData(row,i):
 		data['Songs']=row.Songs.values[0]
 
 	if(row.cast.values[0] != "NaN"):
-		data['cast']=row.cast.values[0].split(';')
+		# data['cast']=row.cast.values[0].split(';')
+		cast_list=row.cast.values[0].split(';')
+		data['cast']=[]
+		for c in cast_list:
+			if ':' in c:
+				cast_val=c.split(':')
+				data['cast'].append(cast_val[1] + " గా " + "[["+ cast_val[0] +"]]")
+			else:
+				data['cast'].append("[[" + c +"]]")
 	else:
-		data['cast']=row.cast.values[0]
+		data['cast']=row.cast.values[0]	
 	
+	if(row.stars.values[0] != 'NaN'):
+		data['starslist']=row.stars.values[0]
+	else:
+		data['starslist']=str('NaN')
+	
+	if(row.writers.values[0] != 'NaN'):
+		data['wri_list']=row.writers.values[0]
+	else:
+		data['wri_list']=str('NaN')
+
+	if(row.producer.values[0] != 'NaN'):
+		data['pro_list']=row.producer.values[0]
+	else:
+		data['pro_list']=str('NaN')
+
+	if(row.languages.values[0] != 'NaN'):
+		data['lang_list']=row.languages.values[0]
+	else:
+		data['lang_list']=str('NaN')
+
+	if(row.composer.values[0] != 'NaN'):
+		data['comp_list']=row.composer.values[0]
+	else:
+		data['comp_list']=str('NaN')
+
+	if(row.cinematography.values[0] != 'NaN'):
+		data['cinemat_list']=row.cinematography.values[0]
+	else:
+		data['cinemat_list']=str('NaN')
+	
+	if(row.film_editor.values[0] != 'NaN'):
+		data['fe_list']=row.film_editor.values[0]
+	else:
+		data['fe_list']=str('NaN')
+
+	if(row.countries.values[0] != 'NaN'):
+		data['crty_list']=row.countries.values[0]
+	else:
+		data['crty_list']=str('NaN')
+
+	if(row.distributed_by.values[0] != 'NaN'):
+		data['d_list']=row.distributed_by.values[0]
+	else:
+		data['d_list']=str('NaN')
+
 	return data
 
 def main():
