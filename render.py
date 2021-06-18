@@ -21,7 +21,7 @@ def getData(row,i):
 		'sound_mix':row.sound_mix.values[0],
 		'synopsis':row.Synopsis.values[0],
 		'colors':row.colors.values[0],
-		'Votes':row.Votes.values[0],
+		'Votes':(int)(row.Votes.values[0]),
 		'Rating':row.Rating.values[0],
 		'cumulative':row.cumulative.values[0],
 		'production_company':row.production_company.values[0],
@@ -30,7 +30,7 @@ def getData(row,i):
 		'Gross':row.Gross.values[0],
 		'Rated':row.Rated.values[0],
 		'Genre':row.Genre.values[0],
-		'Release_Year':row.Release_Year.values[0],
+		'Release_Year':(int)(row.Release_Year.values[0]),
 		'Director':row.Director.values[0],
 		'writers':row.writers.values[0],
 		'languages':row.languages.values[0],
@@ -73,7 +73,11 @@ def getData(row,i):
 		'distribution_format': row.distribution_format.values[0],
 		'main_subject': row.main_subject.values[0],
 		'part_of_series':row.part_of_series.values[0],
-		'narrative_location': row.narrative_location.values[0]
+		'narrative_location': row.narrative_location.values[0],
+		'poster': row.poster.values[0],
+		'eRated':row.eRated.values[0],
+		'wikipedia_url':row.wikipedia_url.values[0],
+		'wikidata_url':row.wikidata_url.values[0]
 	}
 	if(row.Songs.values[0] != "NaN"):
 		data['Songs']=ast.literal_eval(row.Songs.values[0])
@@ -153,7 +157,7 @@ def main():
 	moviesDF =pickle.load(open('./123telugu.pkl', 'rb'))
 
 	ids = moviesDF.IMDbID.tolist()
-	ids =ids[1:2] #remove this to generate articles for all movies
+	ids =ids[3:4] #remove this to generate articles for all movies
 
 	# Initiate the file object
 	# fobj = open('movies.xml', 'w')
