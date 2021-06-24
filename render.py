@@ -157,7 +157,7 @@ def main():
 	moviesDF =pickle.load(open('./123telugu.pkl', 'rb'))
 
 	ids = moviesDF.IMDbID.tolist()
-	ids =ids[3:4] #remove this to generate articles for all movies
+	ids =ids[1:2] #remove this to generate articles for all movies
 
 	# Initiate the file object
 	# fobj = open('movies.xml', 'w')

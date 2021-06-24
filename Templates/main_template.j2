@@ -80,7 +80,9 @@
 				{%- endif %}
 				{{- line -}}
 			{%- endif %}
+	{%- if Genre != 'NaN' %}
 	ఈ చిత్రం {{Genre}} శైలికి చెందినది.{{" "}} 
+	{%- endif %}
 	{%- if producer != 'NaN' %}
 		{{Title }}  {%- if ',' in producer %}  నిర్మాతలు {%else%} నిర్మాత {% endif %} {{producer}}.{{" "}}
 	{%- endif %}
@@ -98,7 +100,7 @@
 	{%- if ',' in composer %}
 	{%- set line =[
 	"ఈ చిత్రానికి సంగీత దర్శకత్వం "+composer+" అందించారు. ",
-	composer+" ఈ చిత్ర సంగీత దర్షకులు. "]|random
+	composer+" ఈ చిత్ర సంగీత దర్శకులు. "]|random
 	-%}
 	{{line-}}
 	{%- else -%}		
@@ -126,24 +128,23 @@
 		{{line}} 
 	{%- endif -%}
 	{%- if Release_Year != 'NaN' and languages!='NaN' and countries!='NaN' -%}
-	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం, {{languages}} భాషలో,{{countries}} {%- if ',' in countries %} దేశాల్లో {%else%} దేశంలో {% endif %} విడుదల చేయబడింది.{{" "}}
+	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం, {{languages}} {%- if ',' in languages %}  భాషలలో {%else%} భాషలో {% endif %},{{countries}} {%- if ',' in countries %} దేశాల్లో {%else%} దేశంలో {% endif %} విడుదల చేయబడింది.{{" "}}
 	{%- elif Release_Year == "NaN" and languages!='NaN' and countries!='NaN' -%}
-	ఈ చిత్రం {%- if ',' in languages %} భాషలలో {%else%} భాషలో {% endif %},{{countries}} {%- if ',' in countries %} దేశాల్లో {%else%} దేశంలో {% endif %} విడుదల చేయబడింది.{{" "}} 
+	ఈ చిత్రం {{languages}} {%- if ',' in languages %} భాషలలో {%else%} భాషలో {% endif %},{{countries}} {%- if ',' in countries %} దేశాల్లో {%else%} దేశంలో {% endif %} విడుదల చేయబడింది.{{" "}} 
 	{%- elif Release_Year != "NaN" and languages!='NaN' and countries=='NaN' -%}
-	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం, {{languages}} భాషలో విడుదల చేయబడింది.{{" "}}
+	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం, {{languages}} {%- if ',' in languages %}  భాషలలో {%else%} భాషలో {% endif %} విడుదల చేయబడింది.{{" "}}
 	{%- elif Release_Year != "NaN" and languages=='NaN' and countries!='NaN' -%}
 	{{Release_Year}} లో విడుదల అయిన ఈ చిత్రం {{countries}}{%- if ',' in countries %} దేశాల్లో {%else%} దేశంలో {% endif %} విడుదల చేయబడింది.{{" "}}
 	{%- endif %}
 	{%- if Rated != 'NaN' and Rated != 'Unrated' and Rated != 'Not Rated' and Rated != 'Approved' and Rated != 'Passed' -%}
-	ఈ చిత్రానికి {{Rated}} ({{eRated}}) వయోపరిమితి (Rated) లభించింది.{{" "}}
+	ఈ చిత్రానికి {{Rated}} ({{eRated}}) సెన్సార్ గుర్తింపు (Rated) లభించింది.{{" "}}
 	{%- elif Rated == 'Unrated' or Rated == 'Not Rated' -%}
-	ఈ చిత్రానికి ఎటువంటి వయోపరిమితి (Rated) సర్టిఫికేట్ ఇవ్వబడలేదు.{{" "}} 
+	ఈ చిత్రానికి ఎటువంటి సెన్సార్ గుర్తింపు(Rated) ఇవ్వలేదు.{{" "}} 
 	{%- elif Rated == 'Approved' or Rated == 'Passed' -%}
 	ఈ చిత్రాన్ని హేస్ కోడ్ ద్వారా అంగీకరించారు.{{" "}}
 	{%- endif -%}
 	{%- if main_subject != "NaN" -%}
-	ఈ చిత్రం యొక్క ముఖ్య పాఠ్యాంశము {{main_subject}}.{{" "}}
-	<ref name="wikidata">[{{wikidata_url}} {{title}} వికీడేటా]</ref>
+	ఈ చిత్రం యొక్క ముఖ్య పాఠ్యాంశము {{main_subject}}.{{" "}}<ref name="wikidata">[{{wikidata_url}} {{title}} వికీడేటా]</ref>
 	{%- endif -%}
 	{%- if synopsis != 'NaN' %}
 	ఈ చిత్ర కథాంశం - {{synopsis}} {{" "}}
@@ -152,8 +153,7 @@
 	ఈ చిత్రం {{based_on}} ఆధారంగా చిత్రీకరించబడింది.{{" "}}  
 	{%- endif %}
 	{%- if distributed_by != 'NaN' %}
-	ఈ చిత్రం {{distributed_by}} ద్వారా పంపిణీ చేయబడింది.{{" "}}
-	<ref name="wikidata">[{{wikidata_url}} {{title}} వికీడేటా]</ref>
+	ఈ చిత్రం {{distributed_by}} ద్వారా పంపిణీ చేయబడింది.{{" "}}<ref name="wikidata">[{{wikidata_url}} {{title}} వికీడేటా]</ref>
 	{%- endif %}	
 {%- endmacro -%}
 
@@ -221,14 +221,14 @@
 {%-endif-%}
 {%-if sound_mix!="NaN"-%}
 	{%- set line =[
-					"ఈ చిత్రానికి ఉపయోగించిన  సౌండ్ టెక్నాలజీ " +sound_mix ,
+					"ఈ చిత్రానికి ఉపయోగించిన  సౌండ్ టెక్నాలజీ " +sound_mix+ ".",
 					sound_mix + " సౌండ్ టెక్నాలజీ ఈ చిత్రానికి  ఉపయోగించారు. "
 				]|random
 	-%}
 {{ line }}
 {%-endif-%}
 {%-if colors!="NaN"-%}
-  ఈ చిత్రం చిత్రికరణ {{colors}} లో తీయబడింది.{{" "}}
+  ఈ చిత్రం చిత్రీకరణ  {{colors}} లో తీయబడింది.{{" "}}
 {%-endif-%}
 {%-if distribution_format !="NaN"-%}
 	ఈ చిత్రం పంపిణీ ఆకృతి {{distribution_format}}.{{" "}}<ref name="wikidata">[{{wikidata_url}} {{title}} వికీడేటా]</ref>
@@ -266,15 +266,15 @@
 		{%- endif -%}
 
 		{%- if opening_weekend!="NaN" -%}
-			ఈ చిత్రం మొదటి వారంలో {{opening_weekend}} డాలర్లు వసూలు చేసింది.{{" "}}
+			ఈ చిత్రం మొదటి వారంలో {{opening_weekend}}  వసూలు చేసింది.{{" "}}
 		{% endif -%}
 		
 		{%- if Gross!="NaN"-%}
-		 	ఈ చిత్రం మొత్తం అమెరికాలో {{Gross}} డాలర్లు వసూలు చేసింది.{{" "}}
+		 	ఈ చిత్రం మొత్తం అమెరికాలో {{Gross}}  వసూలు చేసింది.{{" "}}
 		{%- endif -%}
 		
 		{%- if cumulative!="NaN" -%}
-		 	ప్రపంచవ్యాప్తంగా ఈ చిత్రం{{" "}} {{cumulative}} {{" "}}డాలర్లు వసూలు చేసింది.{{" "}}
+		 	ప్రపంచవ్యాప్తంగా ఈ చిత్రం{{" "}} {{cumulative}} {{" "}} వసూలు చేసింది.{{" "}}
 		{%- endif -%}
 {{line}}
 {%- endif -%}
@@ -368,7 +368,7 @@
 			{%- if casting != "NaN" -%}
 				{%- set line =[
 					"ఈ చిత్రానికి తారాగణాన్ని  ఎంచుకున్న వారు " + casting + ". ",
-					"ఈ చిత్రానికి తారాగణాన్ని "+ cinematography + " ఎంపిక చేశారు. "
+					"ఈ చిత్రానికి తారాగణాన్ని "+ casting + " ఎంపిక చేశారు. "
 				]|random
 				-%}
 				{{- line -}}
@@ -423,7 +423,11 @@
 		{%- endif %}
 
 		{%- if Songs != "NaN" -%}
+		{%- if lensong > 1 -%}
 			ఈ చిత్రం లో మొత్తం {{ lensong }} పాటలు ఉన్నాయి. ఈ చిత్ర పాటల జాబితా క్రింద ఇవ్వబడింది.<ref name="song">[https://www.imdb.com/title/{{IMDbID}}/soundtrack?ref_=tt_trv_snd/ {{Title}} సౌండ్ ట్రాక్]</ref>	
+		{%- elif songcomma == "False" -%}
+			ఈ చిత్ర పాటల జాబితా క్రింద ఇవ్వబడింది.<ref name="song">[https://www.imdb.com/title/{{IMDbID}}/soundtrack?ref_=tt_trv_snd/ {{Title}} సౌండ్ ట్రాక్]</ref>	
+		{%- endif %}
 			{{ '\n' }}
 			{%- if songcomma == "True"  -%}
 				<div style="overflow-y: scroll; overflow-x: hidden; max-height : 40em;">
@@ -464,7 +468,7 @@
 {%-endif-%}
 {%- endmacro -%}
 
-{%- macro references_categories(Rated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
+{%- macro references_categories(Rated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
 {#{==మూలాలు==}#} 
 {{ '\n==మూలాలు==\n' }}
 
@@ -488,9 +492,11 @@
 
         {%- if Release_Year!="NaN"-%}
 			{%- if languages!="NaN"-%}
-				[[Category: {{Release_Year}} {{languages}} సినిమాలు ]]
+			{%- for l in languages_list -%}
+				[[Category: {{Release_Year}} {{l}} సినిమాలు ]]
+			{%- endfor -%}
 			{%- else -%}
-				[[Category: {{Release_Year}}
+				[[Category: {{Release_Year}} సినిమాలు]]
 			{%- endif -%}
         {%- endif -%}
 
@@ -500,9 +506,9 @@
 		{%- endfor -%}
         {%- endif -%}
 
-        {%- if Rated!="NaN"-%}		
+		{%- if Rated != 'NaN' and Rated != 'Unrated' and Rated != 'Not Rated' and Rated != 'Approved' and Rated != 'Passed' -%}
 		[[Category: {{Rated}} రేటింగ్ సినిమాలు  ]]
-        {%- endif -%}
+		{%- endif -%}
         
 		{%- if Director!="NaN"-%}
 		{%- for d in director_list -%}
@@ -540,12 +546,7 @@
         {%- endfor -%}
         {%- endif -%}
        
-        {%- if film_editor!="NaN"-%}
-		{%- for e in editors_list -%}
-		[[Category: {{e}} ]] 
-        {%- endfor -%}
-        {%- endif -%}
-
+        
         {%- if colors!="NaN"-%}
 		{%- for col in colors_list -%}
 		[[Category: {{col}} సినిమాలు]] 
@@ -576,4 +577,4 @@
 
 {{- other_info(trivia,part_of_series) -}}
 
-{{-references_categories(Rated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,film_editor,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}
+{{-references_categories(Rated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}
