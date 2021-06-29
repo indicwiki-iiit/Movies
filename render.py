@@ -77,7 +77,8 @@ def getData(row,i):
 		'poster': row.poster.values[0],
 		'eRated':row.eRated.values[0],
 		'wikipedia_url':row.wikipedia_url.values[0],
-		'wikidata_url':row.wikidata_url.values[0]
+		'wikidata_url':row.wikidata_url.values[0],
+		'tagline': row.tagline.values[0]
 	}
 	if(row.Songs.values[0] != "NaN"):
 		data['Songs']=ast.literal_eval(row.Songs.values[0])
@@ -157,7 +158,7 @@ def main():
 	moviesDF =pickle.load(open('./123telugu.pkl', 'rb'))
 
 	ids = moviesDF.IMDbID.tolist()
-	ids =ids[1:2] #remove this to generate articles for all movies
+	ids =ids[3:4] #remove this to generate articles for all movies
 
 	# Initiate the file object
 	# fobj = open('movies.xml', 'w')
