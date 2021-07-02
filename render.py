@@ -186,13 +186,15 @@ def main():
 	fobj = open('movies.xml', 'w')
 	fobj.write(tewiki+'\n')
 
+	initial_page_id = 500000
+
 	for i, movieId in enumerate(ids):
 		row = moviesDF.loc[moviesDF['IMDbID']==movieId]
 		title = row.Title.values[0]
 		text = template.render(getData(row,i))
 
-		writePage(title,text,fobj)
-
+		writePage(initial_page_id,title,text,fobj)
+		initial_page_id += 1
 		print(text, '\n')
 
 	fobj.write('</mediawiki>')

@@ -41,7 +41,6 @@ tewiki = '''<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:x
 
 # 300000 - 305000 => school's articles
 # Global Variables
-page_id =500000
 
 user_id ="Moviesindicwiki"
 username ="18105"
@@ -60,7 +59,7 @@ def sha36(page_id):
 	
 	return ''.join(reversed(chars))
 
-def writePage(title, wikiText, fobj):
+def writePage(page_id,title, wikiText, fobj):
 	global user_id, username
 
 	pglen = len(wikiText)

@@ -9,7 +9,7 @@ import pandas as pd
 
 
 def main():
-    moviesFile = 'data/Dataset8900 - FinalKB_telugu.csv'
+    moviesFile = 'data/FinalKB Telugu.csv'
     moviesDF = pd.read_csv(moviesFile)
     moviesDF = moviesDF.fillna('NaN')
     pickle.dump(moviesDF, open('./123telugu.pkl', 'wb'))
