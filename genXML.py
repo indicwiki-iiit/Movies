@@ -43,8 +43,8 @@ tewiki = '''<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:x
 # Global Variables
 page_id =500000
 
-user_id ="aforakhilesh"
-username ="Akhilesh Aravapalli"
+user_id ="Moviesindicwiki"
+username ="18105"
 
 # Funtions to write page to file object
 def sha36(page_id):

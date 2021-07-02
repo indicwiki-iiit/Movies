@@ -2,7 +2,7 @@ import pickle
 import ast
 from jinja2 import Environment, FileSystemLoader
 
-# from genXML import tewiki, writePage
+from genXML import tewiki, writePage
 
 
 def getData(row,i):
@@ -38,7 +38,7 @@ def getData(row,i):
 		'colors':row.colors.values[0],
 		'film_editor':row.film_editor.values[0],
 		'Winner': w,
-		'Nominee': n,
+		'Nominee':n,
 		'IMDbID': row.IMDbID.values[0],
 		'stars':row.stars.values[0],
 		'producer':row.producer.values[0],
@@ -78,8 +78,28 @@ def getData(row,i):
 		'eRated':row.eRated.values[0],
 		'wikipedia_url':row.wikipedia_url.values[0],
 		'wikidata_url':row.wikidata_url.values[0],
-		'tagline': row.tagline.values[0]
+		'tagline': row.tagline.values[0],
+		# 'eWinner': row.eWinner.values[0],
+		# 'eNominee': row.eNominee.values[0]
 	}
+	eWinner = []
+	eNominee = []
+	if row.eWinner.values[0] != "NaN":
+		eW =  ast.literal_eval(row.eWinner.values[0])
+		for item in eW:
+			eWinner.append(item)
+	else: 
+		eW = "NaN"
+	if row.eNominee.values[0] != "NaN":
+		eN = ast.literal_eval(row.eNominee.values[0])
+		for item in eN:
+			eNominee.append(item)
+	else:
+		eN = "NaN"
+
+
+	data['eWinner'] = eWinner
+	data['eNominee'] = eNominee
 	if(row.Songs.values[0] != "NaN"):
 		data['Songs']=ast.literal_eval(row.Songs.values[0])
 		data['lensong']=len(ast.literal_eval(row.Songs.values[0]))
@@ -157,22 +177,26 @@ def main():
 
 	moviesDF =pickle.load(open('./123telugu.pkl', 'rb'))
 
-	ids = moviesDF.IMDbID.tolist()
-	ids =ids[3:4] #remove this to generate articles for all movies
+	ids = ['tt0111161','tt0252487','tt0068646','tt0050083','tt0093603','tt0468569','tt0252488','tt0167260','tt0110912','tt10888594','tt0417056','tt0096870','tt0060666','tt0421051','tt0808240','tt5988370','tt4009460','tt7886848','tt6038600','tt7221896']
+
+	# ids = moviesDF.IMDbID.tolist()
+	# ids =ids[1:2] #remove this to generate articles for all movies
 
 	# Initiate the file object
-	# fobj = open('movies.xml', 'w')
-	# fobj.write(tewiki+'\n')
+	fobj = open('movies.xml', 'w')
+	fobj.write(tewiki+'\n')
 
 	for i, movieId in enumerate(ids):
 		row = moviesDF.loc[moviesDF['IMDbID']==movieId]
 		title = row.Title.values[0]
 		text = template.render(getData(row,i))
-		# print(row.isna().iloc[0][39])
-		# print('*')
-		# print(row)
-		# print(i, title)
+
+		writePage(title,text,fobj)
+
 		print(text, '\n')
+
+	fobj.write('</mediawiki>')
+	fobj.close()
 
 if __name__ == '__main__':
 	main()
