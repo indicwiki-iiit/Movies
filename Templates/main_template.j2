@@ -188,7 +188,7 @@
 	{| class="wikitable sortable plainrowheaders"
 	! scope="col" | పురస్కారము
 	! scope="col" | వర్గం 
-	! scope="col" | గ్రహీత
+	! scope="col" | గ్రహీత(లు)
 	! scope="col" | ఫలితము
     {%- if Winner != "NaN" -%}
         {%- for item in Winner -%}
@@ -276,9 +276,9 @@
 				-%}
 			{%- endif -%}
 			{{line}}
-		{%- elif production_company!="NaN" or budget=="NaN" -%}
+		{%- elif production_company!="NaN" and budget=="NaN" -%}
 			{{production_company}} నిర్మాణ{%- if ',' in production_company -%} {{" "}} సంస్థలు {{" "}}{%- else -%} సంస్థ{{" "}}  {%- endif -%} ఈ చిత్రాన్ని నిర్మించారు.{{" "}}
-		{%- elif production_company=="NaN" or budget!="NaN" -%}
+		{%- elif production_company=="NaN" and budget!="NaN" -%}
 			ఈ సినిమాని నిర్మాణ {%- if ',' in production_company -%} {{" "}}సంస్థలు {{" "}}{%- else -%} సంస్థ{{" "}} {%- endif -%}{{budget}} {{" "}}బడ్జెట్ తో నిర్మించారు.{{" "}}
 		{%- endif -%}
 
