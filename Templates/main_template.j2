@@ -137,13 +137,13 @@
 		{{line}} 
 	{%- endif -%}
 	{%- if Release_Year != 'NaN' and languages!='NaN' and countries!='NaN' -%}
-	{{Release_Year}} లో విడుదల అయిన ఈ చలన చిత్రం, {{languages}} {%- if ',' in languages -%}{{" "}}భాషలలో {%- else -%} {{" "}}భాషలో {%- endif -%},{{countries}} {%- if ',' in countries -%}{{" "}} దేశాల్లో {{" "}}{%- else -%}{{" "}} దేశంలో{{" "}} {%- endif -%} విడుదల చేయబడింది.{{" "}}
+	{{Release_Year}} లో విడుదల అయిన ఈ చలన చిత్రం, {{languages}} {%- if ',' in languages -%}{{" "}}భాషలలో{%- else -%} {{" "}}భాషలో{%- endif -%},{{" "}}{{countries}} {%- if ',' in countries -%}{{" "}} లో {{" "}}{%- else -%}{{" "}} లో{{" "}} {%- endif -%} విడుదల చేయబడింది.{{" "}}
 	{%- elif Release_Year == "NaN" and languages!='NaN' and countries!='NaN' -%}
-	ఈ సినిమా {{languages}} {%- if ',' in languages -%} {{" "}}భాషలలో{%- else -%}{{" "}} భాషలో{%- endif -%},{{countries}} {%- if ',' in countries -%}{{" "}} దేశాల్లో {{" "}}{%- else -%}{{" "}} దేశంలో {{" "}}{%- endif -%} విడుదల అయింది.{{" "}} 
+	ఈ సినిమా {{languages}} {%- if ',' in languages -%} {{" "}}భాషలలో{%- else -%}{{" "}} భాషలో{%- endif -%}{{" "}},{{" "}}{{countries}} {%- if ',' in countries -%}{{" "}} లో {{" "}}{%- else -%}{{" "}} లో {{" "}}{%- endif -%} విడుదల అయింది.{{" "}} 
 	{%- elif Release_Year != "NaN" and languages!='NaN' and countries=='NaN' -%}
 	ఈ చిత్రం {{Release_Year}} లో {{languages}} {%- if ',' in languages -%} {{" "}} భాషలలో{{" "}}{%- else -%}{{" "}} భాషలో{{" "}}{%- endif -%} విడుదల అయింది.{{" "}}
 	{%- elif Release_Year != "NaN" and languages=='NaN' and countries!='NaN' -%}
-	{{Release_Year}} లో {{countries}}{%- if ',' in countries -%} {{" "}}దేశాల్లో {{" "}}{%- else -%}{{" "}} దేశంలో {{" "}}{%- endif -%} ఈ చిత్రం విడుదల అయింది.{{" "}}
+	{{Release_Year}} లో {{countries}}{%- if ',' in countries -%} {{" "}}దేశాల్లో {{" "}}{%- else -%}{{" "}} లో {{" "}}{%- endif -%} ఈ చిత్రం విడుదల అయింది.{{" "}}
 	{%- endif -%}
 	{%- if Rated != 'NaN' and Rated != 'Unrated' and Rated != 'Not Rated' and Rated != 'Approved' and Rated != 'Passed' -%}
 	ఈ సినిమాకి {{eRated}} సెన్సార్ గుర్తింపు లభించింది.{{" "}}
@@ -183,11 +183,11 @@
     {%- if Nominee != 'NaN' and Winner == 'NaN' -%}
     {{Title}} వివిధ క్యాటగిరీస్ లో నామినేట్ చేయబడింది. వాటి వివరాలు క్రింద ఇవ్వబడ్డాయి<ref name="awards">[https://www.imdb.com/title/{{IMDbID}}/awards/?ref_=tt_awd {{Title}} పురస్కారములు]</ref>.
     {%- endif -%}{{'\n'}}
-	{%- if Winner != 'NaN' and Nominee != 'NaN'-%}
+	{%- if Winner != 'NaN' or Nominee != 'NaN'-%}
 	<div style="overflow-y: scroll; overflow-x: hidden; max-height : 40em;">
 	{| class="wikitable sortable plainrowheaders"
 	! scope="col" | పురస్కారము
-	! scope="col" | వర్గం 
+	! scope="col" | క్యాటగిరి 
 	! scope="col" | గ్రహీత(లు)
 	! scope="col" | ఫలితము
     {%- if Winner != "NaN" -%}
@@ -251,11 +251,7 @@
 
 {%- macro critics_response(Votes,Rating) -%}
 {{ '\n==రేటింగ్స్ ==\n' }}
-		{%- if Votes!="NaN" and Rating!="NaN" -%}
-			{{Votes}} మంది వీక్షకులు వేసిన ఓట్ల ఆధారంగా ఈ చిత్రానికి ఐ.ఎం.డీ.బి లో {{Rating}} రేటింగ్ లభించింది.{{" "}}
-		{%- elif Votes=="NaN" or Rating!="NaN" -%} 
-			ఈ సినిమాకి ఐ.ఎం.డీ.బి లో లభించిన రేటింగ్ {{Rating}}.{{" "}} 
-		{%- endif -%}
+ఐ.ఎం.డీ.బి లో {{Votes}} మంది వీక్షకులు వేసిన ఓట్ల ఆధారంగా ఈ చిత్రానికి {{Rating}} రేటింగ్ లభించింది.
 {%- endmacro -%}
 
 {%- macro production_boxOffice(production_company,budget,opening_weekend,Gross,cumulative) -%}
@@ -321,7 +317,7 @@
 			{%- endif %}
 
 			{%- if producer != "NaN" -%}
-				{%- if producer_list | length >1 -%}
+				{%- if ',' in producer -%}
 				* నిర్మాతలు : {{ producer + '\n' }}
 				{%- else -%}
 				* నిర్మాత : {{ producer + '\n' }}
@@ -333,7 +329,7 @@
 			{%- endif %}
 
 			{%- if film_editor != "NaN" -%}
-			* ఎడిటర్ : {{ film_editor + '\n' }}
+			* ఎడిటింగ్ : {{ film_editor + '\n' }}
 			{%- endif %}
 
 			{%- if cinematography != "NaN" -%}
@@ -426,13 +422,9 @@
 {%-endif-%}
 {%- endmacro -%}
 
-{%- macro references_categories(Rated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
+{%- macro references_categories(eRated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-%}
 {#{==మూలాలు==}#} 
 {{ '\n==మూలాలు==\n' }}
-
-
-
-		
 		{{reflist}}
 
 		{{'\n'}}
@@ -464,8 +456,8 @@
 		{%- endfor -%}
         {%- endif -%}
 
-		{%- if Rated != 'NaN' and Rated != 'Unrated' and Rated != 'Not Rated' and Rated != 'Approved' and Rated != 'Passed' -%}
-		[[Category: {{Rated}} రేటింగ్ సినిమాలు  ]]
+		{%- if eRated != 'NaN' and eRated != 'Unrated' and eRated != 'Not Rated' and eRated != 'Approved' and eRated != 'Passed' -%}
+		[[Category: {{eRated}} రేటెడ్ సినిమాలు  ]]
 		{%- endif -%}
         
 		{%- if Director!="NaN"-%}
@@ -503,13 +495,14 @@
 		[[Category: {{p}} నిర్మాణం చేసిన సినిమాలు ]] 
         {%- endfor -%}
         {%- endif -%}
-       
         
         {%- if colors!="NaN"-%}
 		{%- for col in colors_list -%}
 		[[Category: {{col}} సినిమాలు]] 
         {%- endfor -%}
         {%- endif -%}
+
+		[[Category: తెవికీ సినిమాలు]] 
 
 {%-endmacro-%}
 
@@ -535,4 +528,4 @@
 
 {{- other_info(Title, film_locations, trivia,part_of_series,tagline,IMDbID) -}}
 
-{{-references_categories(Rated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}
+{{-references_categories(eRated,wikipedia_url,wikidata_url,title,Genre,genre_list,Release_Year,stars,stars_list,Director,director_list,writers,writers_list,languages,languages_list,countries,countries_list,colors,colors_list,editors_list,production_company,production_list,composer,composer_list,cinematography,cine_list)-}}

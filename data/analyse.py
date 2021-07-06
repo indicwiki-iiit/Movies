@@ -4,6 +4,7 @@ file_tobe_analysed = pd.read_csv("Dataset8900 - FinalKB.csv")
 
 count = [0] * 8929
 
+# Function to generate Boolean values based on availability of value in the cell
 def analyse(): 
     for i in range(len(file_tobe_analysed)):
         # print(i)

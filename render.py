@@ -171,26 +171,32 @@ def getData(row,i):
 	return data
 
 def main():
+	# Load the template
 	file_loader = FileSystemLoader('./Templates')
 	env = Environment(loader=file_loader)
 	template = env.get_template('main_template.j2')
 
-	moviesDF =pickle.load(open('./123telugu.pkl', 'rb'))
+	# Load the data (.pkl)
+	moviesDF =pickle.load(open('./123.pkl', 'rb'))
+	
+	# Test XML generation 
+	# ids = ['tt0111161','tt0252487','tt0068646','tt0050083','tt0093603','tt0468569','tt0252488','tt0167260','tt0110912','tt10888594','tt0417056','tt0096870','tt0060666','tt0421051','tt0808240','tt5988370','tt4009460','tt7886848','tt6038600','tt7221896']
 
-	ids = ['tt0111161','tt0252487','tt0068646','tt0050083','tt0093603','tt0468569','tt0252488','tt0167260','tt0110912','tt10888594','tt0417056','tt0096870','tt0060666','tt0421051','tt0808240','tt5988370','tt4009460','tt7886848','tt6038600','tt7221896']
-
-	# ids = moviesDF.IMDbID.tolist()
-	# ids =ids[1:2] #remove this to generate articles for all movies
+	#remove this to generate articles for all movies
+	ids = moviesDF.IMDbID.tolist()
+	ids =ids[200:300] 
 
 	# Initiate the file object
 	fobj = open('movies.xml', 'w')
 	fobj.write(tewiki+'\n')
 
+	# Give the page_id from which you want to generate the articles in
 	initial_page_id = 500000
 
+	# Loop to grab all data from the .pkl and generate articles using the template
 	for i, movieId in enumerate(ids):
 		row = moviesDF.loc[moviesDF['IMDbID']==movieId]
-		title = row.Title.values[0]
+		title = row.page_heading.values[0]
 		text = template.render(getData(row,i))
 
 		writePage(initial_page_id,title,text,fobj)
@@ -202,4 +208,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-

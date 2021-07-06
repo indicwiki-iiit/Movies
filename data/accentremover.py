@@ -2,8 +2,6 @@ import unicodedata
 import pandas as pd
 
 df = pd.read_csv("./data/accents.csv")
-# df1 = pd.read_csv("./data/accentscleaned.csv")
-# cleanedlist = []
 
 def strip_accents(text):
 
@@ -22,8 +20,6 @@ def main():
     for i in range(len(df)):
         df.iloc[i][0] = strip_accents(str(df.iloc[i][0]))
 
-    # data = zip(cleanedlist)
-    # df1 = pd.DataFrame(data, columns=['cine'])
     df.to_csv("./data/accentscleaned.csv") 
 
 if __name__ == '__main__':

@@ -39,7 +39,6 @@ tewiki = '''<mediawiki xmlns="http://www.mediawiki.org/xml/export-0.10/" xmlns:x
 		</namespaces>
 	</siteinfo>\n'''
 
-# 300000 - 305000 => school's articles
 # Global Variables
 
 username ="Moviesindicwiki"
@@ -59,6 +58,15 @@ def sha36(page_id):
 	
 	return ''.join(reversed(chars))
 
+# Function to replace possible Entity references
+def clean(wikiText):
+	wikiText = wikiText.replace('&',"&amp;")
+	wikiText = wikiText.replace('<',"&lt;")
+	wikiText = wikiText.replace('>',"&gt;")
+
+	return wikiText
+
+# Function to generate XML content that uses title and rendered data from render.py
 def writePage(page_id,title, wikiText, fobj):
 	global user_id, username
 
@@ -81,7 +89,7 @@ def writePage(page_id,title, wikiText, fobj):
 			<model>wikitext</model>
 			<format>text/x-wiki</format>
 			<text xml:space="preserve" bytes="''' +str(pglen) +'''">
-			\n''' +wikiText +'''
+			\n''' + clean(wikiText) +'''
 			</text>
 			<sha1>''' +sha36(page_id) +'''</sha1>
 		</revision>

@@ -4,7 +4,7 @@ import pandas as pd
 final_list= []
 
 # Add your subscription key and endpoint
-subscription_key = "a8bde529757b448ea6fcb723bbe9fbda"
+subscription_key = "******************************"
 endpoint = "https://api.cognitive.microsofttranslator.com/"
 
 # Add your location, also known as region. The default is global.
