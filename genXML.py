@@ -64,7 +64,7 @@ def clean(text):
 	text = text.replace('<',"&lt;")
 	text = text.replace('>',"&gt;")
 
-	return wikiText
+	return text
 
 # Function to generate XML content that uses title and rendered data from render.py
 def writePage(page_id,title, wikiText, fobj):
