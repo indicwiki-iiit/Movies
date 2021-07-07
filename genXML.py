@@ -59,10 +59,10 @@ def sha36(page_id):
 	return ''.join(reversed(chars))
 
 # Function to replace possible Entity references
-def clean(wikiText):
-	wikiText = wikiText.replace('&',"&amp;")
-	wikiText = wikiText.replace('<',"&lt;")
-	wikiText = wikiText.replace('>',"&gt;")
+def clean(text):
+	text = text.replace('&',"&amp;")
+	text = text.replace('<',"&lt;")
+	text = text.replace('>',"&gt;")
 
 	return wikiText
 
@@ -75,7 +75,7 @@ def writePage(page_id,title, wikiText, fobj):
 	
 	curPage ='''\n\n
 	<page>
-		<title>''' +title +'''</title>
+		<title>''' +clean(title) +'''</title>
 		<ns>0</ns>
 		<id>''' +str(page_id) +'''</id>
 		<revision>
