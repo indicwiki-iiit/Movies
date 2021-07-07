@@ -1,3 +1,27 @@
 # Movies
+Movies is a branch of IndicWiki Project
 
-Tewiki sandbox: https://tewiki.iiit.ac.in/index.php?title=%E0%B0%B5%E0%B0%BE%E0%B0%A1%E0%B1%81%E0%B0%95%E0%B0%B0%E0%B0%BF:Moviesindicwiki/%E0%B0%AA%E0%B1%8D%E0%B0%B0%E0%B0%AF%E0%B1%8B%E0%B0%97%E0%B0%B6%E0%B0%BE%E0%B0%B2  
+
+## Description
+
+The goal of this project is to automate the process of generation of Movie wikipedia articles in Telugu language. 
+
+## Installation
+Create virtual environment in the project folder using the following commands.
+
+```bash
+$ pip install virtualenv
+$ virtualenv -p python3.7 venv
+```
+After the successful creation of virtual environment (venv), clone the repository or down the zip folder of the project and extract it into the project folder.
+
+Activate the virtual environment and headover to install the dependencies by following command.
+```bash
+$ pip install -r requirements.txt
+```
+requirements.txt comes along with the Project Directory. 
+
+
+
+This repository contains the details and data under TeWiki Project for Movies domain.  
+You can find the detailed report [here](https://drive.google.com/file/d/1Rck-6_dGswe0TFp2KFQT3lkkDdzS4oNk/view?usp=sharing)  

@@ -79,10 +79,10 @@
 - Movie name, director, writer, producer, actors starring in the movie, music(composer), cinematographer, editing (film editor of the movie), released (year of release), runtime (Duration of the movie), budget of the movie, country, language, Gross, distributors and poster of the movie are the attributes included in the Infobox section
  
 **Intropara1**
-- In this paragraph, attributes listed are name of the movie, released year, Genre, Director, writers, producer, production company, starred actors, composer and film locations of the movie.
+- In this paragraph, attributes listed are name of the movie, release year, genre, director, writers, starring, composer, synopsis, the reference the movie is based on and the main subject of the movie
  
 **Intropara2**
-- And in the second paragraph, details regarding the budget, Rated (Film Certification), year of release, languages, countries, Rated, main subject of the film, synopsis, based on and distributors are the attributes which are mentioned for that particular movie.
+- In this paragraph, producer and production company, details regarding the budget, Rated (Film Certification), year of release, languages, countries, Rated, distributors are mentioned
  
 **Plot (కధ)**
 - Plot of the movie and narrative locations are provided in this section.
@@ -143,7 +143,7 @@ Crew
 
  
 **Other Info (ఇతర విశేషాలు)**
-- Trivia and part of series for the movie are mentioned in this section.
+- Trivia,filming locations,tagline of the movie & part of series for the movie are mentioned in this section.
 
 **References (మూలాలు)**
 - References of the movie are imdb , wikidata and Wikipedia, which are mentioned in this section.
@@ -233,6 +233,8 @@ Bing Translate(Azure service): - Used
 - Render.py generates the wikitext for every movie. This wikitext is dumped into a single xml file with the help of genxml.py.
 - This single xml file contains wikitext of each movie with distinct pageids.
 - This single xml file is imported to wikipedia to generate the articles for different movies.
+- It is observed that there were duplicate movie titles in the dataset which will cause a problem while generating an XML file, as they might overwrite the previous movie with the same name. Since these movies were released in different years, appending the release year to the movie name was a preferred solution which made sure that there were no duplicates. 
+- While creating the XML, pre-defined entitities were also taken care of by replacing them with appropriate strings.
 ## Quality Review
 - Each person of the group rendered 10 different articles everyday and checked whether each and every edge case is covered.
 - Regularly had review meets with our mentor(Prasanna) and enriched the structure and quality of the article.
