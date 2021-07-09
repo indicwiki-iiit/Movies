@@ -234,7 +234,7 @@ Bing Translate(Azure service): - Used
 - This single xml file contains wikitext of each movie with distinct pageids.
 - This single xml file is imported to wikipedia to generate the articles for different movies.
 - It is observed that there were duplicate movie titles in the dataset which will cause a problem while generating an XML file, as they might overwrite the previous movie with the same name. Since these movies were released in different years, appending the release year to the movie name was a preferred solution which made sure that there were no duplicates. 
-- While creating the XML, pre-defined entitities(< > &) were also taken care of by replacing them with appropriate strings(\&lt; \&gt; \&amp;) respectively. These entities are replaced with the strings mentioned above in all of the Wikitext and the title of the movie.
+- While creating the XML, pre-defined entitities(< > & ' ") were also taken care of by replacing them with appropriate strings(\&lt; \&gt; \&amp; \&apos; \&quot;) respectively. These entities are replaced with the strings mentioned above in all of the Wikitext and the title of the movie.
 ## Quality Review
 - Each person of the group rendered 10 different articles everyday and checked whether each and every edge case is covered.
 - Regularly had review meets with our mentor(Prasanna) and enriched the structure and quality of the article.
