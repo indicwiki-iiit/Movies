@@ -234,7 +234,7 @@ Bing Translate(Azure service): - Used
 - This single xml file contains wikitext of each movie with distinct pageids.
 - This single xml file is imported to wikipedia to generate the articles for different movies.
 - It is observed that there were duplicate movie titles in the dataset which will cause a problem while generating an XML file, as they might overwrite the previous movie with the same name. Since these movies were released in different years, appending the release year to the movie name was a preferred solution which made sure that there were no duplicates. 
-- While creating the XML, pre-defined entitities were also taken care of by replacing them with appropriate strings.
+- While creating the XML, pre-defined entitities(< > &) were also taken care of by replacing them with appropriate strings(\&lt; \&gt; \&amp;) respectively. These entities are replaced with the strings mentioned above in all of the Wikitext and the title of the movie.
 ## Quality Review
 - Each person of the group rendered 10 different articles everyday and checked whether each and every edge case is covered.
 - Regularly had review meets with our mentor(Prasanna) and enriched the structure and quality of the article.
@@ -247,9 +247,20 @@ Bing Translate(Azure service): - Used
 > Repository Link : https://github.com/indicwiki-iiit/Movies
 
 Github Structure :
-![](https://i.imgur.com/USOsQ0g.png)
+![](https://i.imgur.com/LkGCTuy.png)
+
+
 
 ### Details regarding structure
+
+### Stats
+> Github folder Link: https://github.com/indicwiki-iiit/Movies/tree/main/Stats
+- This folder contains the statistcs that were observed from the dataset.
+    - _Domains, Attributes - Movies.pdf_ -- This file contains all the section details, attributes used in the section, their attributes count and the description of the section.
+    - _Template, translation details.pdf_ -- It has details about the attributes that have been translated and translitered along with the tools that have been used. It also mentions the details about the atributes that had limited values and hence were manually translitered(Example:countries -> USA:యు.స్.ఎ).
+    - _stats - Attrs-Record values.pdf_ -- This file has details about the attributes and their record count and it also has extra details about the stub articles, not stub articles, average, lowest, highest word count movie articles.
+    - _stats - bool values.csv_ -- It has boolen representation for each record value, i.e. "1" indicating that the value is present and "0" means that the value is not present.
+
 ### Templates
 > Github folder Link: https://github.com/indicwiki-iiit/Movies/tree/main/Templates
 - This folder contains the templates that are used for article generation
