@@ -247,8 +247,8 @@ Bing Translate(Azure service): - Used
 > Repository Link : https://github.com/indicwiki-iiit/Movies
 
 Github Structure :
-![](https://i.imgur.com/LkGCTuy.png)
 
+![](https://i.imgur.com/kLntrwO.jpg)
 
 
 ### Details regarding structure
