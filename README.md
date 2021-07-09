@@ -24,8 +24,8 @@ requirements.txt comes along with the Project Directory.
 
 
 This repository contains the details and data under TeWiki Project for Movies domain.  
-You can find the detailed report [here](https://github.com/indicwiki-iiit/Movies/blob/main/report.md) 
-You can also find the sample article [here].(https://github.com/indicwiki-iiit/Movies/blob/main/Templates/Sample%20Article.pdf) 
+You can find the detailed report [here](https://github.com/indicwiki-iiit/Movies/blob/main/report.md)   
+You can also find the sample article [here](https://github.com/indicwiki-iiit/Movies/blob/main/Templates/Sample%20Article.pdf) 
 
 ## Github Structure
 
