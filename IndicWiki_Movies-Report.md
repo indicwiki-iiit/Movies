@@ -243,6 +243,13 @@ Bing Translate(Azure service): - Used
 - As suggested by the language experts, made changes accordingly and added randomization sentences where ever possible.
 - Whole translated and transliterated dataset is sent for review to make sure there are no mistakes in the transliterated/translated data.
 - Rendered many articles and checked for uniformity (spaces between words, paragraph breaks etc.) in the template.
+
+## Future Work
+- We can use the Wikipedia links for the movies list which we extracted from wikidata to extract more information from Wikipedia itself. If we can have a better translation system that can translate stories and paragraphs with huge context, then we can significantly increase the articles' length 
+- We have chosen the basis of selection as number of votes rather than rating of the movie. (All langauge movies with more than 10000 votes). This has significantly reduced the number of movies that can be considered notable by Wikipedia, to solve this issue we need to find a factor which can correctly pick the notable movies.
+- Transliteration and translation are very handy to use, but only at the cost of spelling mistakes and grammatical errors, We can also try to find a better service provider which can help to reduce the manual labour.
+- While generating articles, we can also make sure that the content is not controversial.
+
 ## Github
 > Repository Link : https://github.com/indicwiki-iiit/Movies
 
